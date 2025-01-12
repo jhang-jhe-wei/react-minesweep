@@ -20,7 +20,7 @@ jobs:
     - run: npm install
     - run: npm run build
     - name: upload exported build
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v4
       with:
         name: out
         path: build
@@ -32,12 +32,12 @@ jobs:
 
     steps:
     - name: download exported build
-      uses: actions/download-artifact@v1
+      uses: actions/download-artifact@v4
       with:
         name: out
-    - run: echo '${{ github.event.repository.name }}.wells.tw' > ./out/CNAME
+    - run: echo '${{ github.event.repository.name }}.wells.tw' > CNAME
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./out
+        publish_dir: .
